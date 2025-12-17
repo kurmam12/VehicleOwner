@@ -1,0 +1,12 @@
+com\cog\pract\repository\VehicleOwnerRepo.class
+com\cog\pract\exception\ErrorResponse.class
+com\cog\pract\service\ChallanService.class
+com\cog\pract\service\VehicleOwnerService.class
+com\cog\pract\VehicleOwnerApplication.class
+com\cog\pract\repository\ChallanRepo.class
+com\cog\pract\model\VehicleOwner.class
+com\cog\pract\exception\GlobalExceptionHandler.class
+com\cog\pract\controller\ChallanController.class
+com\cog\pract\controller\VehicleOwnerController.class
+com\cog\pract\model\Challan.class
+com\cog\pract\exception\VehicleNumberNotFoundException.class

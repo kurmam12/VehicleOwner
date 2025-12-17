@@ -1,0 +1,52 @@
+package com.cog.pract.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cog.pract.exception.VehicleNumberNotFoundException;
+import com.cog.pract.model.VehicleOwner;
+//import com.cog.pract.payment.service.PaymentDetailsService;
+import com.cog.pract.service.VehicleOwnerService;
+
+@RestController
+@RequestMapping("/vehicleowner")
+public class VehicleOwnerController {
+	 private static final Logger log = LoggerFactory.getLogger(VehicleOwnerController.class);
+
+	private VehicleOwnerService vehicleOwnerService;
+	
+	public VehicleOwnerController(VehicleOwnerService vehicleOwnerService) {
+		this.vehicleOwnerService = vehicleOwnerService;
+	}
+	
+	@GetMapping("/vehicle")
+    public String sayHello() {
+        return "Hello from Spring Boot!";
+    }
+
+	@GetMapping("/vehicledetails/{vehclenumber}")
+	public ResponseEntity<VehicleOwner> getVehicleDetails(@PathVariable("vehclenumber") String vehclenumber) {
+		log.info("********* I am inside the getVehicleDetails *******");
+		System.out.println("Searching for vehicle number: " + vehclenumber);
+	    // Update the student record here.
+	    
+	    VehicleOwner owner=vehicleOwnerService.findVehcleNumber(vehclenumber);
+	    if (owner != null) {
+	        // HTTP 200 OK: Return the successfully updated resource
+	        return new ResponseEntity<>(owner, HttpStatus.OK);
+	    } else {
+	        // HTTP 404 Not Found: Vehicle with that number does not exist
+	    	throw new VehicleNumberNotFoundException("Vehucle details Not found");
+	       // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	}
+	
+}
